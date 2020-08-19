@@ -20,10 +20,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User login(User user) throws SQLException {
+    public User login(String username, String password) throws Exception {
         Connection conn = DataSourceUtil.openConnection();
         UserDao userDao = new UserDaoImpl(conn);
-        User newUser = userDao.addUser(user);
+        User newUser = userDao.getUserByUserNameAndPwd(username,password);
         DataSourceUtil.closeConnection(conn);
         return newUser;
     }

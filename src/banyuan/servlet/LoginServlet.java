@@ -1,4 +1,4 @@
-package servlet;
+package banyuan.servlet;
 
 import club.banyuan.pojo.User;
 import club.banyuan.service.UserService;

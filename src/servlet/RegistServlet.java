@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.SQLException;
 
 @WebServlet(name = "RegistServlet",urlPatterns = "/regist.do")
 public class RegistServlet extends HttpServlet {
     // 处理Post方式提交的请求
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request,response);
     }
 // 处理Get方式提交请求
-    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String loginName = request.getParameter("loginName");
         String password = request.getParameter("password");
@@ -36,7 +36,7 @@ public class RegistServlet extends HttpServlet {
         UserService userService = new UserServiceImpl();
         try {
             User newUser = userService.register(user);
-            response.sendRedirect("login.html");
+            response.sendRedirect("login.jsp");
         } catch (Exception throwables) {
             //throwables.printStackTrace();
             response.sendRedirect("regist.html");

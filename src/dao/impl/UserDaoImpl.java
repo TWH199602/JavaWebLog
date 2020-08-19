@@ -46,21 +46,6 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
     }
 
     @Override
-    public User getUserByUserNameAndPwd(User user) {
-        String sql = "insert into user values(?,?,?,?)";
-        Object[] param = new Object[4];
-        param[0]=null;
-        param[1]=user.getLoginName();
-        param[2]=user.getUserName();
-        param[3]=user.getPassword();
-        int id = executeInsert(sql,param);
-        user.setId(id);
-
-        closeResource();
-        return user;
-    }
-
-    @Override
     public User tableToClass(ResultSet rs) throws Exception {
         User user = new User();
         user.setId(rs.getInt(1));

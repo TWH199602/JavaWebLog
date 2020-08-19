@@ -50,9 +50,8 @@ public class DataSourceUtil {
     //关闭连接
     public static void closeConnection(Connection connection) {
         try {
-            if (connection != null) {
+            if (connection != null)
                 connection.close();
-            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

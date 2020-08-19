@@ -102,7 +102,6 @@ public abstract class BaseDaoImpl implements IBaseDao {
     }
 
     // 需要重写的方法，将结果集转换为对象
-    @Override
     public abstract Object tableToClass(ResultSet rs) throws Exception;
 
 }
