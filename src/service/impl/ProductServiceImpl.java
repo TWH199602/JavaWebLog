@@ -9,7 +9,7 @@ import club.banyuan.service.ProductService;
 import java.sql.Connection;
 import java.util.List;
 
-public class ProductServiceImpl implements ProductService {
+public class ProductServiceImpl implements ProductService, banyuan.service.ProductService {
     @Override
     public List<Product> getProductByKeyWords(String keyWords) throws Exception {
         Connection conn = DataSourceUtil.openConnection();
@@ -17,5 +17,14 @@ public class ProductServiceImpl implements ProductService {
         List<Product> productList = productDao.getProductByKeyWords(keyWords);
         DataSourceUtil.closeConnection(conn);
         return productList;
+    }
+
+    @Override
+    public Product getProductById(int id) throws Exception {
+        Connection conn = DataSourceUtil.openConnection();
+        ProductDao productDao = new ProductDaoImpl(conn);
+        Product product = productDao.getProductById(id);
+        DataSourceUtil.closeConnection(conn);
+        return product;
     }
 }

@@ -27,4 +27,9 @@ public class UserServiceImpl implements UserService {
         DataSourceUtil.closeConnection(conn);
         return newUser;
     }
+
+    @Override
+    public User getUserInfoByLoginName(String loginName) {
+        return null;
+    }
 }

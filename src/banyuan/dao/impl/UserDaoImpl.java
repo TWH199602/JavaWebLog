@@ -46,6 +46,18 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
     }
 
     @Override
+    public User getUserByLoginName(String loginName) throws Exception {
+        User user =  null;
+        String sql = "select * from user where loginName = ?";
+        ResultSet rs = executeQuery(sql, new Object[]{loginName});
+        if (rs.next()) {
+            user = tableToClass(rs);
+        }
+        this.closeResource();
+        return user;
+    }
+
+    @Override
     public User tableToClass(ResultSet rs) throws Exception {
         User user = new User();
         user.setId(rs.getInt(1));

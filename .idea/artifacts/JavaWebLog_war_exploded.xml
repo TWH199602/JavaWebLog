@@ -7,6 +7,9 @@
         <element id="directory" name="classes">
           <element id="module-output" name="JavaWebLog" />
         </element>
+        <element id="directory" name="lib">
+          <element id="file-copy" path="$PROJECT_DIR$/../../lib/mysql-connector-java-8.0.20.jar" />
+        </element>
       </element>
     </root>
   </artifact>

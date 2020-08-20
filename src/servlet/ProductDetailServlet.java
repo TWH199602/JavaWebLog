@@ -1,8 +1,8 @@
-package banyuan.servlet;
+package servlet;
 
-import club.banyuan.pojo.Product;
-import club.banyuan.service.ProductService;
-import club.banyuan.service.impl.ProductServiceImpl;
+import banyuan.service.ProductService;
+import pojo.Product;
+import service.impl.ProductServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,21 +10,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
-@WebServlet(name = "SearchServlet",urlPatterns = "/search.do")
-public class SearchServlet extends HttpServlet {
+@WebServlet(name = "ProductDetailServlet",urlPatterns = "/detail.do")
+public class ProductDetailServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String keyWords = request.getParameter("keyWords");
+        int id = Integer.parseInt(request.getParameter("id"));
+
         ProductService productService = new ProductServiceImpl();
         try {
-            List<Product> productList = productService.getProductByKeyWords(keyWords);
-            System.out.println(productList.size());
-            request.setAttribute("productList",productList);
-            request.getRequestDispatcher("result.jsp").forward(request,response);
+            Product product = productService.getProductById(id);
+            request.setAttribute("product",product);
         } catch (Exception exception) {
             exception.printStackTrace();
         }
+
+        request.getRequestDispatcher("product.jsp").forward(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

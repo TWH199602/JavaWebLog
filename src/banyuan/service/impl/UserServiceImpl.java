@@ -9,7 +9,7 @@ import club.banyuan.service.UserService;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, banyuan.service.UserService {
     @Override
     public User register(User user) throws SQLException {
         Connection conn = DataSourceUtil.openConnection();
@@ -26,5 +26,14 @@ public class UserServiceImpl implements UserService {
         User newUser = userDao.getUserByUserNameAndPwd(username,password);
         DataSourceUtil.closeConnection(conn);
         return newUser;
+    }
+
+    @Override
+    public User getUserInfoByLoginName(String loginName) throws Exception {
+        Connection connection = DataSourceUtil.openConnection();
+        UserDao userDao = new UserDaoImpl(connection);
+        User user = userDao.getUserByLoginName(loginName);
+        DataSourceUtil.closeConnection(connection);
+        return user;
     }
 }

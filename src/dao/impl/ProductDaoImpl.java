@@ -6,7 +6,6 @@ import club.banyuan.pojo.Product;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,5 +45,18 @@ public class ProductDaoImpl extends BaseDaoImpl implements ProductDao {
         }
         closeResource(rs);
         return productList;
+    }
+
+    @Override
+    public Product getProductById(int id) throws Exception {
+        Product product = null;
+        String sql = "select * from product where id=?";
+        Object[] param = new Object[]{id};
+        ResultSet rs = this.executeQuery(sql,param);
+        while(rs.next()){
+            product = tableToClass(rs);
+        }
+        closeResource(rs);
+        return product;
     }
 }
