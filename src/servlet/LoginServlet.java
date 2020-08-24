@@ -6,10 +6,7 @@ import club.banyuan.pojo.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 
 @WebServlet(name = "LoginServlet",urlPatterns = "/login.do")
@@ -39,6 +36,7 @@ public class LoginServlet extends HttpServlet {
         HttpSession session = request.getSession();
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String isSave = request.getParameter("isSave");
         System.out.println(username + password);
         String url = "login.jsp";
         UserService userService = new UserServiceImpl();
@@ -49,6 +47,11 @@ public class LoginServlet extends HttpServlet {
             if (user != null) {
                 session.setAttribute("user",user);
                 url = "index.jsp";
+                if("true".equalsIgnoreCase(isSave)){
+                    Cookie cookie = new Cookie("loginname",user.getLoginName());
+                    cookie.setMaxAge(365*24*60*60);
+                    response.addCookie(cookie);
+                }
             }
             else {
                 session.setAttribute("errorMsg","用户名密码错误");
@@ -56,7 +59,6 @@ public class LoginServlet extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("111");
         request.getRequestDispatcher(url).forward(request,response);
 
     }

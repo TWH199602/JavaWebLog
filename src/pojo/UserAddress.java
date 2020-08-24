@@ -2,7 +2,7 @@ package pojo;
 
 import javax.xml.crypto.Data;
 
-public class User_address {
+public class UserAddress {
   private Integer id;
   private Integer userId;
   private String address;
@@ -56,5 +56,17 @@ public class User_address {
 
   public void setRemark(String remark) {
     this.remark = remark;
+  }
+
+  @Override
+  public String toString() {
+    return "User_address{" +
+            "id=" + id +
+            ", userId=" + userId +
+            ", address='" + address + '\'' +
+            ", createTime=" + createTime +
+            ", isDefault=" + isDefault +
+            ", remark='" + remark + '\'' +
+            '}';
   }
 }
